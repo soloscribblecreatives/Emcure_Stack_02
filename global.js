@@ -488,10 +488,10 @@ function hit_close1() {
 	$('.hit_2 img').css("display","none");
 	$('.hit_3 img').css("display","none");
 	$('.hit_4 img').css("display","none");
-	$('.hit_pop1 img').css("display","block");
-	$('.hit_pop2 img').css("display","block");
-	$('.hit_pop3 img').css("display","block");
-	$('.hit_pop4 img').css("display","block");
+	$('.hit_pop1').css("display","block");
+	$('.hit_pop2').css("display","block");
+	$('.hit_pop3').css("display","block");
+	$('.hit_pop4').css("display","block");
 	$('.hit_close1').css("display","none");
 }
 
