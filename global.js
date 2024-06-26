@@ -413,7 +413,7 @@ switch(pg_id){
 	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide21/s1.png" width="1080" height="810" alt=""/></div>';
 	break;
 	case 22:
-	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide22/s1.png" width="1080" height="810" alt=""/></div>';
+	content='<link rel="stylesheet" type="text/css" href="slide22/slide1.css" media="screen"/><div class="s1"><img src="slide22/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide22/s2.png"/></div><div class="s3"><img src="slide22/s3.gif"/></div><div class="s4"><img src="slide22/s4.png"/></div><div class="s5"><img src="slide22/s5.png"/></div><div class="s6"><img src="slide22/s6.png"/></div><div class="s7"><img src="slide22/s7.png"/></div><div class="s8"><img src="slide22/s8.png"/></div>';
 	break;
 }
 
@@ -534,10 +534,10 @@ function open_page2(url,page_id,count){
 	if(page_id == 6){
 		document.getElementById("click_through").innerHTML='<div class="slide02_inline_wraper" id="buttons">\
 		<div id="slide01_question01_choices01" class="control-group">\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_01" name="checkB01" value="Clinical Judgement"/><div class="control_indicator" id="radio01" onclick="select1()"></div></label>\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_02" name="checkB01" value="A Validated risk assessment tool"/><div class="control_indicator" id="radio02" onclick="select2()"></div></label>\
+			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_01" name="checkB01" value="Clinical Judgement"/><div class="control_indicator option1" id="radio01" onclick="select1()"></div></label>\
+			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_02" name="checkB01" value="A Validated risk assessment tool"/><div class="control_indicator option2" id="radio02" onclick="select2()"></div></label>\
 		</div>\
-			<div class="submit_button" onclick="savedata(1,1,6,\'' + page_id + '\');endTime1(6);hidesubmitonclick();"></div>\
+			<div class="submit_button" onclick="savedata(1,1,6,\'' + page_id + '\');endTime1(6);skipnextonclick();"></div>\
 			<div class="goRight" onclick="goRight()"></div>\
 			<div class="blocker"></div>\
 		</div>';
@@ -972,6 +972,24 @@ function goBack() {
 	}, 500);
 }
 
+function skipnextonclick()
+{
+	$('.submit_button').css("display","none");
+	skipNext();
+}
+
+function skipNext() {
+	if ($(".option1").hasClass("selected")) {
+		setTimeout(function(){
+			open_page('',7);
+			go_nav('f');
+		}, 500);
+	}
+	else {
+		goRight();
+	}
+}
+
 function select1() {
 	$(".s2").addClass("flashIt");
 	$(".s3").removeClass("flashIt");
@@ -981,6 +999,7 @@ function select1() {
 	$(".s7").removeClass("flashIt");
 	$(".s8").removeClass("flashIt");
 	$(".s9").removeClass("flashIt");
+	$(".option1").addClass("selected");
 	$(".submit_button").css("display","block");
 }
 
