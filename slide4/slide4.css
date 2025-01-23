@@ -1,107 +1,57 @@
-*{
+* {
 	margin: 0px;
 	padding: 0px;
 }
 
-.s1 {
+.s1_1 {
 	position: absolute;
-	width: 1080px;
-	height: 800px;
+	width: 1024px;
+	height: 768px;
 	z-index: 1;
 }
 
-.s2 {
+.s1_2 {
 	position: absolute;
-  left: 493px;
-  top: 376px;
-  width: 93px;
-  height: 36px;
-	animation: flashLong 2s infinite;
-	animation-delay: 0.2s;
-	animation-fill-mode: both;
-	z-index: 3;
-}
-
-.s3 {
-	position: absolute;
-  left: 179px;
-  top: 552px;
-  width: 199px;
-  height: 139px;
-	animation: revealVerticalRev 1s;
-	animation-delay: 0.1s;
-	animation-fill-mode: both;
-	transform-origin: bottom right;
+  left: 417px;
+  top: 306px;
+  width: 302px;
+  height: 86px;
+	animation: zoomIn 0.5s;
+    animation-delay: 0.1s;
+    animation-fill-mode: both;
 	z-index: 5;
 }
 
-.s4 {
-	position: absolute;
-  left: 456px;
-  top: 543px;
-  width: 45px;
-  height: 187px;
-	animation: revealVerticalRev 0.5s;
-	animation-delay: 1s;
-	animation-fill-mode: both;
-	transform-origin: bottom;
+.s1_3 {
+  position: absolute;
+  left: 365px;
+  top: 658px;
+  width: 389px;
+  height: 60px;
+  	animation: flipInX 0.5s;
+    animation-delay: 1s;
+    animation-fill-mode: both;
 	z-index: 5;
 }
 
-.s5 {
-	position: absolute;
-  left: 456px;
-  top: 520px;
-  width: 55px;
-  height: 13px;
-	animation: flashLongOn 0.5s;
-	animation-delay: 1.5s;
-	animation-fill-mode: both;
+.s1_4 {
+  position: absolute;
+  left: 400px;
+  top: 732px;
+  width: 283px;
+  height: 43px;
+  	animation: flashLong 2s infinite;
+    animation-delay: 1.2s;
+    animation-fill-mode: both;
 	z-index: 5;
 }
 
-.s6 {
-	position: absolute;
-  left: 568px;
-  top: 607px;
-  width: 45px;
-  height: 123px;
-	animation: revealVerticalRev 0.5s;
-	animation-delay: 2s;
-	animation-fill-mode: both;
-	transform-origin: bottom;
-	z-index: 5;
-}
-
-.s7 {
-	position: absolute;
-  left: 579px;
-  top: 586px;
-  width: 33px;
-  height: 12px;
-	animation: flashLongOn 0.5s;
-	animation-delay: 2.5s;
-	animation-fill-mode: both;
-	z-index: 5;
-}
-
-@keyframes flashLongOn {
-  0%, 40%, 80% {
+@keyframes flashLong {
+  0%,  100% {
     opacity: 0;
   }
 
-  20%, 60%, 100% {
+  25%, 50%, 75% {
     opacity: 1;
-  }
-}
-
-@keyframes revealVerticalRev {
-  0% {
-    clip: rect(190px,220px,190px,0px);
-    transform: scale3d(.3, .3, .3);
-  }
-  
-  100% {
-    clip: rect(0px,220px,190px,0px);
   }
 }

@@ -1,70 +1,96 @@
-*{
+* {
 	margin: 0px;
 	padding: 0px;
 }
 
-.s1 {
+.s1_1 {
 	position: absolute;
 	width: 1080px;
-	height: 800px;
+	height: 810px;
 	z-index: 1;
 }
 
-.s2 {
+.blocker {
 	position: absolute;
-  left: 493px;
-  top: 381px;
-  width: 93px;
-  height: 40px;
-	animation: flashLong 2s infinite;
-	animation-delay: 0.2s;
-	animation-fill-mode: both;
+	width: 1080px;
+	height: 810px;
 	z-index: 5;
 }
 
-.s3 {
+#bullet1 {
 	position: absolute;
-  left: 331px;
-  top: 569px;
-  width: 168px;
-  height: 117px;
-	animation: revealVerticalRev 1s;
-	animation-delay: 0.1s;
-	animation-fill-mode: both;
-	transform-origin: bottom right;
-	z-index: 3;
+  left: 140px;
+  top: 531px;
+  width: 32px;
+  height: 31px;
+	z-index: 2;
+	display: none;
 }
 
-.s4 {
+#bullet2 {
 	position: absolute;
-  left: 583px;
-  top: 569px;
-  width: 168px;
-  height: 117px;
-	animation: revealVerticalRev 1s;
-	animation-delay: 1s;
-	animation-fill-mode: both;
-	transform-origin: bottom right;
-	z-index: 5;
+  left: 140px;
+  top: 587px;
+  width: 32px;
+  height: 31px;
+	z-index: 2;
+	display: none;
 }
 
-@keyframes flashLong {
-  0%,  100% {
-    opacity: 0;
-  }
-
-  25%, 50%, 75% {
-    opacity: 1;
-  }
+#bullet3 {
+	position: absolute;
+  left: 140px;
+  top: 642px;
+  width: 32px;
+  height: 31px;
+	z-index: 2;
+	display: none;
 }
 
-@keyframes revealVerticalRev {
-  0% {
-    clip: rect(150px,220px,150px,0px);
-    transform: scale3d(.3, .3, .3);
-  }
-  
-  100% {
-    clip: rect(0px,220px,150px,0px);
-  }
+#bullet4 {
+	position: absolute;
+  left: 140px;
+  top: 698px;
+  width: 32px;
+  height: 31px;
+	z-index: 2;
+	display: none;
+}
+
+
+
+#radio01 {
+    position: absolute;
+  left: 118px;
+  top: 527px;
+  width: 599px;
+  height: 49px;
+  z-index: 10;
+}
+
+#radio02 {
+    position: absolute;
+  left: 118px;
+  top: 583px;
+  width: 599px;
+  height: 49px;
+  z-index: 10;
+}
+
+#radio03 {
+    position: absolute;
+  left: 118px;
+  top: 639px;
+  width: 599px;
+  height: 49px;
+  z-index: 10;
+}
+
+#radio04 {
+    position: absolute;
+  left: 118px;
+  top: 695px;
+  width: 599px;
+  height: 49px;
+  z-index: 10;
 }
