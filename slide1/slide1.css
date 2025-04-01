@@ -1,0 +1,48 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+.s1 {
+	position: absolute;
+	width: 1080px;
+	height: 810px;
+	z-index: 1;
+}
+
+.s2 {
+	position: absolute;
+  left: 183px;
+  top: 131px;
+  width: 691px;
+  height: 167px;
+	animation: none 1s infinite;
+	animation-delay: 0s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+.s3 {
+	position: absolute;
+  left: 162px;
+  top: 368px;
+  width: 306px;
+  height: 305px;
+	animation: stampIn 0.3s;
+	animation-delay: 1s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+
+@keyframes stampIn {
+	0%	{
+		transform-origin: 50% 50%;
+		transform: scale(3);
+		opacity: 0;
+	}
+	100%	{
+		transform: scale(1);
+		opacity: 1;
+	}
+}

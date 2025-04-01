@@ -1,0 +1,85 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+.s1 {
+	position: absolute;
+	width: 1080px;
+	height: 810px;
+	z-index: 1;
+}
+
+.s2 {
+	position: absolute;
+  left: 216px;
+  top: 87px;
+  width: 628px;
+  height: 151px;
+	animation: none 1s infinite;
+	animation-delay: 0s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+.s3 {
+	position: absolute;
+  left: 199px;
+  top: 549px;
+  width: 175px;
+  height: 93px;
+	animation: revealHorizontal 2s;
+	animation-delay: 0.2s;
+	animation-fill-mode: both;
+	clip: rect(0px,0px,100px,0px);
+	z-index: 5;
+}
+
+.s4 {
+	position: absolute;
+  left: 411px;
+  top: 504px;
+  width: 586px;
+  height: 24px;
+	animation: fadeInRight 0.5s;
+	animation-delay: 1.6s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+.s5 {
+	position: absolute;
+  left: 411px;
+  top: 557px;
+  width: 350px;
+  height: 26px;
+	animation: fadeInRight 0.5s;
+	animation-delay: 1.8s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+.s6 {
+	position: absolute;
+  left: 411px;
+  top: 612px;
+  width: 398px;
+  height: 26px;
+	animation: fadeInRight 0.5s;
+	animation-delay: 2s;
+	animation-fill-mode: both;
+	z-index: 5;
+}
+
+
+@keyframes revealHorizontal {
+  0% {
+    clip: rect(0px,0px,100px,0px);
+	opacity: 1;
+  }
+  
+  100% {
+    clip: rect(0px,200px,100px,0px);
+	opacity: 1;
+  }
+}
