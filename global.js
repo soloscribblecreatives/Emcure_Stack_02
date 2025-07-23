@@ -206,7 +206,7 @@ var objectData={
 		  "type" : "brandNavigation",
 		  "callback" : "checkLastPgFn"
 		  };
-window.messageHandler.postMessage(JSON.stringify(params));
+//window.messageHandler.postMessage(JSON.stringify(params));
 		
 		//window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
@@ -223,7 +223,7 @@ var objectData={
 		  "type" : "brandNavigation",
 		  "callback" : "checkLastPgFn"
 		  };
-window.messageHandler.postMessage(JSON.stringify(params));
+//window.messageHandler.postMessage(JSON.stringify(params));
 		
     }
 
@@ -252,7 +252,7 @@ var objectData={
 		  "type" : "brandNavigation",
 		  "callback" : "checkLastPgFn"
 		  };
-window.messageHandler.postMessage(JSON.stringify(params));
+//window.messageHandler.postMessage(JSON.stringify(params));
 		
 		// window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
@@ -269,7 +269,7 @@ var objectData={
 		  "type" : "brandNavigation",
 		  "callback" : "checkLastPgFn"
 		  };
-window.messageHandler.postMessage(JSON.stringify(params));
+//window.messageHandler.postMessage(JSON.stringify(params));
 		
     }
 
@@ -373,7 +373,7 @@ function open_page(url,page_id){
   };
 
 
-window.messageHandler.postMessage(JSON.stringify(params)); 
+//window.messageHandler.postMessage(JSON.stringify(params)); 
 	 /* // alert(page_id);
 	//step 10:
 	if (typeof(localStorage.getItem("currentslide"))!='undefined'){
