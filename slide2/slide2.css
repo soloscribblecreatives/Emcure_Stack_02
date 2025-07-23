@@ -1,85 +1,99 @@
-*{
+* {
 	margin: 0px;
 	padding: 0px;
 }
 
-.s1 {
+.background {
 	position: absolute;
 	width: 1080px;
 	height: 810px;
 	z-index: 1;
 }
 
-.s2 {
+.takeCover {
 	position: absolute;
-  left: 216px;
-  top: 87px;
-  width: 628px;
-  height: 151px;
-	animation: none 1s infinite;
-	animation-delay: 0s;
-	animation-fill-mode: both;
-	z-index: 5;
+  left: 0px;
+  top: 639px;
+  width: 76px;
+  height: 54px;
+	z-index: 10;
 }
 
-.s3 {
-	position: absolute;
-  left: 199px;
-  top: 549px;
-  width: 175px;
-  height: 93px;
-	animation: revealHorizontal 2s;
-	animation-delay: 0.2s;
-	animation-fill-mode: both;
-	clip: rect(0px,0px,100px,0px);
-	z-index: 5;
+.hit_1, .hit_2, .hit_3, .hit_4, .hit_5, .hit_6, .hit_7  {
+  position: absolute;
+  width: 1080px;
+  height: 810px;
+  display: none;
+  z-index: 15;
 }
 
-.s4 {
+.hit_pop1 {
 	position: absolute;
-  left: 411px;
-  top: 504px;
-  width: 586px;
-  height: 24px;
-	animation: fadeInRight 0.5s;
-	animation-delay: 1.6s;
-	animation-fill-mode: both;
-	z-index: 5;
+  left: 558px;
+  top: 317px;
+  width: 353px;
+  height: 135px;
+	z-index: 10;
 }
 
-.s5 {
+.hit_pop2 {
 	position: absolute;
-  left: 411px;
-  top: 557px;
-  width: 350px;
-  height: 26px;
-	animation: fadeInRight 0.5s;
-	animation-delay: 1.8s;
-	animation-fill-mode: both;
-	z-index: 5;
+  left: 621px;
+  top: 469px;
+  width: 278px;
+  height: 213px;
+	z-index: 10;
 }
 
-.s6 {
+.hit_pop3 {
 	position: absolute;
-  left: 411px;
-  top: 612px;
-  width: 398px;
-  height: 26px;
-	animation: fadeInRight 0.5s;
-	animation-delay: 2s;
-	animation-fill-mode: both;
-	z-index: 5;
+  left: 679px;
+  top: 391px;
+  width: 220px;
+  height: 238px;
+	z-index: 10;
 }
 
+.hit_pop4 {
+	position: absolute;
+  left: 513px;
+  top: 503px;
+  width: 140px;
+  height: 186px;
+	z-index: 10;
+}
 
-@keyframes revealHorizontal {
-  0% {
-    clip: rect(0px,0px,100px,0px);
-	opacity: 1;
-  }
-  
-  100% {
-    clip: rect(0px,200px,100px,0px);
-	opacity: 1;
-  }
+.hit_pop5 {
+	position: absolute;
+  left: 659px;
+  top: 435px;
+  width: 140px;
+  height: 186px;
+	z-index: 10;
+}
+
+.hit_pop6 {
+	position: absolute;
+  left: 805px;
+  top: 586px;
+  width: 140px;
+  height: 105px;
+	z-index: 10;
+}
+
+.hit_pop7 {
+	position: absolute;
+  left: 805px;
+  top: 479px;
+  width: 140px;
+  height: 105px;
+	z-index: 10;
+}
+
+.hit_close1 {
+	position: absolute;
+	width: 1080px;
+	height: 810px;
+	display: none;
+	z-index: 20;
 }
