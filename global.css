@@ -223,9 +223,8 @@ html[xmlns] .clearfix {
 }
 .active > .box_btn {
 	background-image: url(close.png);
-	bottom: 136px;
+	bottom: 157px;
 }
-
 #myconsole {
 	display: none;
 	position: fixed;

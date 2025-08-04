@@ -1,37 +1,11 @@
 /*Code by android developers start here*/
+
 var startLoc = null;
 //var contentName = '152';
 //step 1:-
 var contentName = parseInt(localStorage.getItem("currentbrand"));
 var currentContentId  = parseInt(localStorage.getItem('currentcontent'));
 //ends
-/* var currentContentNSlide ='';
-
-//custom slides changes begins here....
-
-//alert("++++++++++++"+custcomslideflag1+"+++++++custcomslideid+++++++"+custcomslideid1);
-	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' &&  localStorage.getItem("currentcustomslideflag") =='true'){
-		var custcomslideid1=parseInt(localStorage.getItem("currentcontentcustomslideId"));
-		//step 2:
-
-		currentContentNSlide = currentContentId+"_"+contentName+"_"+custcomslideid1;
-		//step 2 ends here
-		localStorage.setItem("current",currentContentNSlide);
-		localStorage.setItem("currentslide",custcomslideid1);
-
-	}else{
-		//step 3 :
-		currentContentNSlide = currentContentId+"_"+contentName+"_"+'1';
-		//step 3 ends here
-		localStorage.setItem("current",currentContentNSlide);
-		localStorage.setItem("currentslide",'1');
-	}
-	
-//custom slides changes ends here....
-
-/* currentContentNSlide = contentName+"_"+'1';
-localStorage.setItem("current",currentContentNSlide);
-localStorage.setItem("currentslide",'1'); */ 
 checkClickThrough();
 
 document.getElementById("main_content").addEventListener("touchmove", touchHandler, false);
@@ -95,10 +69,7 @@ function touchHandler(e) {
 
 		$("#main_content").swipe({
 	   swipeLeft:function(event, direction, distance, duration, fingerCount) {
-		/* //step 4:-
-		console.log("swipeleft"+localStorage.getItem("currentslide"));
-		localStorage.setItem("previousslide",localStorage.getItem("currentslide"));
-		//step 4 ends here */
+		
 		//alert("swipeleft");
 		//myconsole("swipeleft");
 		var page_id =  parseInt($("#wrapper").attr("rel"));
@@ -112,10 +83,7 @@ function touchHandler(e) {
 	  },
 
 	  swipeRight:function(event, direction, distance, duration, fingerCount) {
-		/* //step 5:-
-		console.log("swiperight"+localStorage.getItem("currentslide"));
-		localStorage.setItem("previousslide",localStorage.getItem("currentslide"));
-		//step 5 ends here  */
+		
 			//alert("swiperight");
 		//myconsole("swiperight");
 		var page_id =  parseInt($("#wrapper").attr("rel"));
@@ -136,53 +104,14 @@ function touchHandler(e) {
 	});
 });
 
-
-
 function go_nav(direction) {
-												
-															 
-					
-				   
- 
-										 
- 
-																																	   
-
-   
-																					 
-   
-	
-								  
+var page_id =  parseInt($("#wrapper").attr("rel"));
+			
 		
-   
-	var page_id =  parseInt($("#wrapper").attr("rel"));
-	
-		
-									
-
-		   
-						  
-															   
-																			
-				   
-																  
 var flag=0;
 if(direction == 'b') {
 
-										 
 
-																									 
-																																		
-		 
-																				
-																																					
-
-
-  
- 
-									
-
-	  
 	if(page_id >= 0){
 		page_id = page_id - 1;
 		//alert(page_id);
@@ -194,95 +123,88 @@ if(direction == 'b') {
 	 if(flag == 2){
         localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
         //flag == 0;
-var objectData={
+		var objectData={
 
-				 "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
-				  "previousslide": localStorage.getItem("previousslide"),
-				 "slideId": page_id
-				 };
-		  var params = {
-		  "query" : objectData,
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
 
-		  "type" : "brandNavigation",
-		  "callback" : "checkLastPgFn"
-		  };
-//window.messageHandler.postMessage(JSON.stringify(params));
-		
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe
+	
 		//window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
         localStorage.setItem("gotoNextPrevBrand" ,0);
-var objectData={
+		var objectData={
 
-				 "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
-				  "previousslide": localStorage.getItem("previousslide"),
-				 "slideId": page_id
-				 };
-		  var params = {
-		  "query" : objectData,
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
 
-		  "type" : "brandNavigation",
-		  "callback" : "checkLastPgFn"
-		  };
-//window.messageHandler.postMessage(JSON.stringify(params));
-		
-    }
-
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe
+	}
 	
 }else {
 	
-	if(page_id <= 2){
+
+	if(page_id <= 7){
 		page_id = page_id + 1;
 		//alert(page_id);
-		if(page_id == 3){
+		if(page_id == 8){
             flag=1;
         }
 	}
 	    if(flag == 1){
         localStorage.setItem("gotoNextPrevBrand" ,1);//if one than next if 2 than prev
          flag == 0;
-var objectData={
+		 var objectData={
 
-				 "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
-				  "previousslide": localStorage.getItem("previousslide"),
-				 "slideId": page_id
-				 };
-		  var params = {
-		  "query" : objectData,
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
 
-		  "type" : "brandNavigation",
-		  "callback" : "checkLastPgFn"
-		  };
-//window.messageHandler.postMessage(JSON.stringify(params));
-		
-		// window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe
+		 //window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
         localStorage.setItem("gotoNextPrevBrand" ,0);
-var objectData={
+		var objectData={
 
-				 "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
-				  "previousslide": localStorage.getItem("previousslide"),
-				 "slideId": page_id
-				 };
-		  var params = {
-		  "query" : objectData,
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
 
-		  "type" : "brandNavigation",
-		  "callback" : "checkLastPgFn"
-		  };
-//window.messageHandler.postMessage(JSON.stringify(params));
-		
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe
+  
     }
 
 
 }
 
 
-
-/* //step 8:
-currentContentNSlide = currentContentId+"_"+contentName+"_"+page_id;
-//step 8 ends here
-localStorage.setItem("current",currentContentNSlide);
-localStorage.setItem("currentslide",page_id); */
 
 $("#wrapper").attr("rel",page_id);
 
@@ -294,7 +216,7 @@ var pg_content = set_pg_content(page_id);
 }
 	//console.log("pg : "+page_id);
 	if(page_id==4){
-		$(".box2").click(function(event) {
+		/* $(".box2").click(function(event) {
 			open_page("",5)
 		});
 		$(".box3").click(function(event) {
@@ -314,24 +236,41 @@ var pg_content = set_pg_content(page_id);
 	 	});
 		$(".box8").click(function(event) {
 	 		open_page("",11)
-	 	});
+	 	}); */
 		
 	}
 	 checkClickThrough();
 }
 
 function set_pg_content(pg_id){
-
+//step 6:-
+//console.log("++++++++pg_id++++"+pg_id+"+++++++currentslide++++++"+localStorage.getItem("currentslide")+"++++++previousslide++++++"+localStorage.getItem("previousslide"));
+		
 $(".reference").removeClass("active");
 currentSlide();
 var selectedContentPath='';
 switch(pg_id){
-		case 1:
-		content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="background"><video width="1080" height="810" controls autoplay><source src="slide1/1.mp4" type="video/mp4"></video>';
-		break;
-		case 2:
-		content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="background"><img src="slide2/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide2/2.jpg" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_2"><img src="slide2/3.jpg" width="1080" height="810" alt=""/></div><div class="hit_pop2" onclick="hit_pop2()"></div><div class="hit_close1" onclick="hit_close1()"></div>';
-		break;
+	case 1:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide1/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide1/s2.png"/></div><div class="s3"><img src="slide1/s3.png"/></div><div class="s4"><img src="slide1/s4.png"/></div><div class="s5"><img src="slide1/s5.png"/></div><div class="s6"><img src="slide1/s6.png"/></div><div class="s7"><img src="slide1/s7.png"/></div><div class="s8"><img src="slide1/s8.png"/></div><div class="s9"><img src="slide1/s9.png"/></div><div class="s10"><img src="slide1/s10.png"/></div>';
+	break;
+	case 2:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide2/1.jpg" width="1080" height="810" alt=""/></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
+    case 3:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide3/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
+    case 4:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide4/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
+	case 5:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide5/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
+	case 6:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide6/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
+	case 7:
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide7/1.jpg" width="1080" height="810" alt=""></div><div class="hit_1"><img src="slide1/api.png" width="1080" height="810" alt=""/></div><div class="hit_pop1" onclick="hit_pop1()"></div><div class="hit_close1" onclick="hit_close1()"></div><div class="takeCover" onclick="takeCover();"></div>';
+	break;
 }
 
 return content;
@@ -347,6 +286,7 @@ function showDiv2() {
 
 
 function open_page(url,page_id){
+	 //alert("===openpage====");
 	localStorage.getItem('currentbrand');
     localStorage.getItem('currentcontent');
     localStorage.getItem('currentcontentbrandId');
@@ -357,8 +297,6 @@ function open_page(url,page_id){
 	//alert("====currentcontentbrandId======"+localStorage.getItem('currentcontentbrandId'));
 	//alert("====current======"+localStorage.getItem('current'));
 	//alert("====previousslide======"+localStorage.getItem("previousslide"));
-  
- 
 	//alert("====page_id======"+page_id);
 		var objectData={
 
@@ -372,23 +310,8 @@ function open_page(url,page_id){
   "callback" : "checkLastPgFn"
   };
 
-
-//window.messageHandler.postMessage(JSON.stringify(params)); 
-	 /* // alert(page_id);
-	//step 10:
-	if (typeof(localStorage.getItem("currentslide"))!='undefined'){
-		//to checked previous slide has god end time...
-		var slideid=localStorage.getItem("currentslide");
-		toCaptureTime(slideid);
-		
-	}
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe
 	
-	// toCaptureTime(page_id);
-	 localStorage.setItem("currentslide",page_id);
-	 currentContentNSlide = currentContentId+"_"+contentName+"_"+page_id;
-	 localStorage.setItem("current",currentContentNSlide);
-	//step 10 ends here */
-
 	 $("#wrapper").attr("rel",page_id);
 	 var content="";
 	 var pg_content = set_pg_content(page_id);
@@ -447,7 +370,6 @@ function open_page(url,page_id){
 		var curr_id =  parseInt($("#wrapper").attr("rel"));
 		$(".slides").removeClass("active");
 		$(".slides:nth-child("+curr_id+")").addClass("active");
-        runAnimation();
 	}
 
 	var ln = 0;
@@ -500,34 +422,6 @@ $(document).ready(function(){
 		$('.touchbtn').css("display","block");
 	})
 })
-
-
-/*--------------------- animation javascript -----------------------*/
-
-function s9_pop1() {
-	$('.s9_1').css("display","block");
-	$('.s9_c1ose1').css("display","block");
-	$('.s9_pop1').css("display","none");
-}
-
-//Additional Jquery animation code can start from here
-
-function framepop(){
-	setTimeout( function(){
-		$('.frame').show();
-		$('.frameclose').show();
-		$('.frameopen').hide();
-	},100);
-}
-
-function frameclose(){
-	setTimeout( function(){
-		$('.frame').hide();
-		$('.frameclose').hide();
-		$('.frameopen').show();
-	},100);
-}
-
 
 /*--------------------- animation javascript -----------------------*/
 
