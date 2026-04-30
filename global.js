@@ -1,10 +1,6 @@
-
 var arrSurveyQuestions = {
-   1: "Is Trans Epidermal Water Loss (TEWL) important in treating fungal infections?",
-   2: "Are you convinced that Lulican has better formulation advantage to treat fungal infections?"
+   3: "Starting price for the original?"
 };
-
-
 /*Code by android developers start here*/
 var startLoc = null;
 //var contentName = '152';
@@ -16,7 +12,7 @@ var currentContentNSlide ='';
 
 //custom slides changes begins here....
 
-//alert("+++++currentContentId+++++++"+currentContentId+"+++++++contentName+++++++"+contentName);
+//console.log("+++++currentContentId+++++++"+currentContentId+"+++++++contentName+++++++"+contentName);
 	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' &&  localStorage.getItem("currentcustomslideflag") =='true'){
 		var custcomslideid1=parseInt(localStorage.getItem("currentcontentcustomslideId"));
 		//step 2:
@@ -33,7 +29,6 @@ var currentContentNSlide ='';
 		localStorage.setItem("current",currentContentNSlide);
 		localStorage.setItem("currentslide",'1');
 	}
-
 checkClickThrough();
 
 document.getElementById("main_content").addEventListener("touchmove", touchHandler, false);
@@ -97,13 +92,15 @@ function touchHandler(e) {
 
 		$("#main_content").swipe({
 	   swipeLeft:function(event, direction, distance, duration, fingerCount) {
-		//step 4:-
+		  //step 4:-
 		console.log("swipeleft"+localStorage.getItem("currentslide"));
 		localStorage.setItem("previousslide",localStorage.getItem("currentslide"));
 		//step 4 ends here
+		
 		//alert("swipeleft");
 		//myconsole("swipeleft");
 		var page_id =  parseInt($("#wrapper").attr("rel"));
+		//alert("swipeleft"+page_id);
 		var last_page_id = $(".slides").length;
 		var slide_jumper_open = $(".reference").hasClass("active");
 		if(page_id == last_page_id+1)	{
@@ -114,10 +111,11 @@ function touchHandler(e) {
 	  },
 
 	  swipeRight:function(event, direction, distance, duration, fingerCount) {
-		//step 5:-
+		  //step 5:-
 		console.log("swiperight"+localStorage.getItem("currentslide"));
 		localStorage.setItem("previousslide",localStorage.getItem("currentslide"));
 		//step 5 ends here 
+		
 			//alert("swiperight");
 		//myconsole("swiperight");
 		var page_id =  parseInt($("#wrapper").attr("rel"));
@@ -138,12 +136,7 @@ function touchHandler(e) {
 	});
 
 
-
-
 });
-
-
-
 
 //step 6:-
 function toCaptureTime(page_id){
@@ -183,7 +176,7 @@ else{
 	
  } 
  
-	if(nextSlideNo <= 2){//number 3 is number of total slides present
+	if(nextSlideNo <= 6){//number 3 is number of total slides present
 	// alert(nextSlideNo);
 	var tempNext = localStorage.getItem(currentContentId+"_"+contentName+"_slideNo_"+nextSlideNo);
 
@@ -203,88 +196,106 @@ else{
 }
 //step ends..
 
-
 function go_nav(direction) {
-	
-	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' &&   localStorage.getItem("currentcustomslideflag") =='true'){
-
-	var custcomslideid=parseInt(localStorage.getItem("currentcontentcustomslideId"));
-
-		var page_id =  custcomslideid;
-		}else{
+var page_id =  parseInt($("#wrapper").attr("rel"));
 			
-				var page_id =  parseInt($("#wrapper").attr("rel"));
-		}	
 		
-	console.log("swipeleft"+localStorage.getItem("currentslide"));
-	localStorage.setItem("previousslide",localStorage.getItem("currentslide"));
-	//step 7 ends here
-//localStorage.setItem(contentName+"_slideNo_"+currentSlideNo ,n);
 var flag=0;
-
-
 if(direction == 'b') {
 
-	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' &&    localStorage.getItem("currentcustomslideflag") =='true'){
-		flag==0
-		localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
-		window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
 
-
+	if(page_id >= 0){
+		page_id = page_id - 1;
+		//alert(page_id);
+		//console.log(page_id);
+		if(page_id == 0){
+            flag=2;
+        }
 	}
-			else{
-			if(page_id >= 0){
-				page_id = page_id - 1;
-				if(page_id == 0){
-					flag=2;
-				}
-			}
-
 	 if(flag == 2){
         localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
         //flag == 0;
-		window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
+		var objectData={
+
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe //pageswipe
+	
+		//window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
         localStorage.setItem("gotoNextPrevBrand" ,0);
-    }
+		var objectData={
 
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe //pageswipe
 	}
+	
 }else {
 	
-//custom slide changes continues here....
-
-	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' && localStorage.getItem("currentcustomslideflag") =='true'){
-		flag==0
-		localStorage.setItem("gotoNextPrevBrand" ,1);//if one than next if 2 than prev
-
-		window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
-	}
-	
-		else{
-		if(page_id <= 2){
+	if(page_id <= 6){
 		page_id = page_id + 1;
 		//alert(page_id);
-		if(page_id == 3){
+		if(page_id == 7){
             flag=1;
         }
-	}	
+	}
 	    if(flag == 1){
         localStorage.setItem("gotoNextPrevBrand" ,1);//if one than next if 2 than prev
          flag == 0;
-		 window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
+		 var objectData={
+
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
+
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe //pageswipe
+		 //window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
     }else{
         localStorage.setItem("gotoNextPrevBrand" ,0);
+		var objectData={
+
+         "gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id
+         };
+  var params = {
+  "query" : objectData,
+  "type" : "brandNavigation",
+  "callback" : "checkLastPgFn"
+  };
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe //pageswipe
+  
     }
 
-}
+
 }
 
 
-//step 8:
-currentContentNSlide = currentContentId+"_"+contentName+"_"+page_id;
-//step 8 ends here
-localStorage.setItem("current",currentContentNSlide);
-localStorage.setItem("currentslide",page_id);
 
 $("#wrapper").attr("rel",page_id);
 
@@ -296,39 +307,54 @@ var pg_content = set_pg_content(page_id);
 }
 	//console.log("pg : "+page_id);
 	if(page_id==4){
-		$(".box2").click(function(event) {
+		/* $(".box2").click(function(event) {
 			open_page("",5)
 		});
 		$(".box3").click(function(event) {
 			open_page("",6)
 		});
+		$(".box4").click(function(event) {
+	 		open_page("",7)
+	 	});
+		$(".box5").click(function(event) {
+	 		open_page("",8)
+	 	});
+		$(".box6").click(function(event) {
+	 		open_page("",9)
+	 	});
+		$(".box7").click(function(event) {
+	 		open_page("",10)
+	 	});
+		$(".box8").click(function(event) {
+	 		open_page("",11)
+	 	}); */
 		
 	}
-	 checkClickThrough();
+	 checkClickThrough(page_id);
 }
 
 function set_pg_content(pg_id){
-
-	if (typeof(localStorage.getItem("previousslide"))!='undefined'){
-		//to checked previous slide has god end time...
-		var previousslideid=localStorage.getItem("previousslide");
-		toCaptureTime(previousslideid);
-		
-	}
-	toCaptureTime(pg_id);
-
-
-	//step 9 ends here..
-//alert("++++++++++set_pg_content++++++++++"+pg_id);
 $(".reference").removeClass("active");
 currentSlide();
 var selectedContentPath='';
 switch(pg_id){
 	case 1:
-	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide1/s1.png" width="1024" height="768" alt=""/></div><div class="yes"><img src="slide1/yes.png"/></div><div class="no"><img src="slide1/no.png"/></div>';
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide1/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide1/s2.png"/></div><div class="s3"><img src="slide1/s3.png"/></div><div class="s4"><img src="slide1/s4.png"/></div><div class="s5"><img src="slide1/s5.png"/></div><div class="s6"><img src="slide1/s6.png"/></div><audio autoplay id="intro" src="slide1/intro.mp3" type="audio/mpeg"></audio>';
 	break;
 	case 2:
-	content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="s1"><img src="slide2/s1.png" width="1024" height="768" alt=""/></div><div class="yes"><img src="slide2/yes.png"/></div><div class="no"><img src="slide2/no.png"/></div>';
+	content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="s1"><img src="slide2/s1.png" width="1080" height="810"/></div><audio id="cardflip" src="slide2/cardflip.mp3" type="audio/mpeg"></audio><audio id="success" src="slide2/success.mp3" type="audio/mpeg"></audio><script>runAnimationCard()</script>';
+	break;
+	case 3:
+	content='<link rel="stylesheet" type="text/css" href="slide3/slide3.css" media="screen"/><div class="s1"><img src="slide3/s1.png" width="1080" height="810"/></div><audio id="spin" src="slide3/spin.mp3" type="audio/mpeg"></audio><audio id="fanfare" src="slide3/fanfare.mp3" type="audio/mpeg"></audio><audio id="wrong" src="slide3/wrong.mp3" type="audio/mpeg"></audio><script>runAnimationWheel()</script>';
+	break;	
+	case 4:
+	content='<link rel="stylesheet" type="text/css" href="slide4/slide4.css" media="screen"/><div class="s1"><img src="slide4/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide4/s2.png"/></div><div class="s3"><img src="slide4/s3.png"/></div><div class="s4"><img src="slide4/s4.png"/></div><div class="s5"><img src="slide4/s5.png"/></div><div class="s6w"><div class="s6"><img src="slide4/s6.png"/></div></div><div class="s7"><img src="slide4/s7.png"/></div><div class="s8"><img src="slide4/s8.png"/></div><audio loop id="launch" src="slide4/launch.mp3" type="audio/mpeg"></audio>';
+	break;
+	case 5:
+	content='<link rel="stylesheet" type="text/css" href="slide5/slide5.css" media="screen"/><div class="s1"><img src="slide5/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide5/s2.png"/></div><div class="s3"><img src="slide5/s3.png"/></div><div class="s4"><img src="slide5/s4.png"/></div><div class="s5"><img src="slide5/s5.png"/></div><div class="s6"><img src="slide5/s6.png"/></div><div class="s7"><img src="slide5/s7.png"/></div><div class="s8"><img src="slide5/s8.png"/></div><audio id="swoosh" src="slide5/swoosh.mp3" type="audio/mpeg"></audio><audio id="stack" src="slide5/stack.mp3" type="audio/mpeg"></audio>';
+	break;
+	case 6:
+	content='<link rel="stylesheet" type="text/css" href="slide6/slide6.css" media="screen"/><div class="s1"><img src="slide6/s1.png" width="1080" height="810" alt=""/></div>';
 	break;
 }
 
@@ -343,45 +369,52 @@ function showDiv2() {
    document.getElementById('welcomeDiv2').style.display = "block";
 }
 
-
 function open_page(url,page_id){
-	
-	
-	    count3=2;
+	count3=2;
     count4=0;
 	if (typeof(localStorage.getItem("currentslide"))!='undefined'){
 		//to checked previous slide has god end time...
 		var slideid=localStorage.getItem("currentslide");
-		toCaptureTime(slideid);
-		
+		toCaptureTime(slideid);	
 	}
-
-	
 
 	// toCaptureTime(page_id);
 	 localStorage.setItem("currentslide",page_id);
 	 currentContentNSlide = currentContentId+"_"+contentName+"_"+page_id;
 	 localStorage.setItem("current",currentContentNSlide);
 	//step 10 ends here
-
 	 $("#wrapper").attr("rel",page_id);
 	 var content="";
 	 var pg_content = set_pg_content(page_id);
 
 	 	$("#main_content").html(pg_content);
 
-	 if(page_id==4){
+	/*  if(page_id==4){
 		$(".box2").click(function(event) {
 			open_page("",5)
 		});
 		$(".box3").click(function(event) {
 			open_page("",6)
 		});
-	 }
+		$(".box4").click(function(event) {
+	 		open_page("",7)
+	 	});
+		$(".box5").click(function(event) {
+	 		open_page("",8)
+	 	});
+		$(".box6").click(function(event) {
+	 		open_page("",9)
+	 	});
+		$(".box7").click(function(event) {
+	 		open_page("",10)
+	 	});
+		$(".box8").click(function(event) {
+	 		open_page("",11)
+	 	});
+	 } */
 	  checkClickThrough();
 	}
-
-	var count3=2,count4=0;
+var count3=2,count4=0;
 
 function open_page2(url,page_id,count){
     count1=0;
@@ -405,79 +438,73 @@ function open_page2(url,page_id,count){
 	$("#main_content").html(pg_content);
 	checkClickThrough();
 }
-	
-	
-	function checkClickThrough(){
+
+	function checkClickThrough(page_id){
 	var currentslide=localStorage.getItem("currentslide");
 	//alert(currentslide);
 	document.getElementById("click_through").innerHTML='';
 	
-	
-	if(currentslide == 1){
-		document.getElementById("click_through").innerHTML='<div class="blocker"><div><div class="slide02_inline_wraper" id="buttons"><div class="slide01_home_btn_mask"></div>\
-			<div id="slide01_question01_choices01" class="control-group">\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_01" name="checkB01" value="Yes"/><div class="control_indicator"id="radio01" onclick="selectYes()"></div></label>\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_02" name="checkB01" value="No"/><div class="control_indicator"id="radio02" onclick="selectNo()"></div></label>\
-			</div>\
-			<div class="submit_button" onclick="savedata(1,1,1);endTime1(1);hidesubmitonclick();"></div></div></div>';  
-		$('#slide01_question01_choices01').delay(10).fadeIn();
+	if(page_id == 1){
+		document.getElementById("click_through").innerHTML='<div class="blocker"></div><div class="begin" onclick="begin()"></div>';
+		
+		setTimeout(function(){
+			intro();
+		}, 0000);
 
-		$(document).on("click touchstart", "#slide01_question01_choices01 input[name]", function(){
-			if ($("input[name='checkB01']:checked").val()){
-				var test = $(this).val();
-				$(".submit_button,.slide01_next").fadeIn();		
-			}			
-		});
+		function intro(){
+			document.getElementById("intro").play();
+		}
+	}
 
-		$(document).on("click", ".submit_button", function(){
-			$('.slide01_submit_popup_content').fadeIn();
-		});
-
-		$(document).on("click", ".slide01_submit_popup_close_btn_mask", function(){
-			$('.slide01_submit_popup_content').fadeOut();
-		});
+	if(page_id == 2){
+		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div class="s2"><img src="slide2/s2.png"></div><div class="s3"><img src="slide2/s3.png"></div><div class="cards-holder"><div class="card-wrapper" data-card="1"><div class="card-inner"><div class="card-face card-front"><img src="slide2/card1.png"></div><div class="card-face card-back"><img src="slide2/dark1.png"></div></div></div><div class="card-wrapper" data-card="2"><div class="card-inner"><div class="card-face card-front"><img src="slide2/card2.png"></div><div class="card-face card-back"><img src="slide2/dark2.png"></div></div></div><div class="card-wrapper" data-card="3"><div class="card-inner"><div class="card-face card-front"><img src="slide2/card3.png"></div><div class="card-face card-back"><img src="slide2/dark3.png"></div></div></div></div>';
 	}
 	
-	if(currentslide == 2){
-		document.getElementById("click_through").innerHTML='<div class="blocker"><div><div class="slide02_inline_wraper" id="buttons"><div class="slide01_home_btn_mask"></div>\
-			<div id="slide01_question01_choices01" class="control-group">\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_01" name="checkB01" value="Yes"/><div class="control_indicator"id="radio01" onclick="selectYes()"></div></label>\
-			<label class="control control_radio"><div class="lbl_pos"></div><input type="radio" id="slide01_radio01_02" name="checkB01" value="No"/><div class="control_indicator"id="radio02" onclick="selectNo()"></div></label>\
-			</div>\
-			<div class="submit_button" onclick="savedata(1,1,2);endTime1(2);hidesubmitonclick();"></div></div></div>';  
-		$('#slide01_question01_choices01').delay(10).fadeIn();
+	if(page_id == 3){
+		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div id="gameCanvas"><div class="pointer left"></div><div class="pointer right"></div><div class="centerGlow"></div><div id="wheelWindow"><div id="wheelStrip"></div></div></div><img id="startBtn" src="slide3/start.png"><img id="resultImage" src="">';
+	}
+	if(page_id == 4){
+		document.getElementById("click_through").innerHTML='';
+		
+		setTimeout(function(){
+			launch();
+		}, 0000);
 
-		$(document).on("click touchstart", "#slide01_question01_choices01 input[name]", function(){
-			if ($("input[name='checkB01']:checked").val()){
-				var test = $(this).val();
-				$(".submit_button,.slide01_next").fadeIn();		
-			}			
-		});
-
-		$(document).on("click", ".submit_button", function(){
-			$('.slide01_submit_popup_content').fadeIn();
-		});
-
-		$(document).on("click", ".slide01_submit_popup_close_btn_mask", function(){
-			$('.slide01_submit_popup_content').fadeOut();
-		});
+		function launch(){
+			document.getElementById("launch").play();
+		}
 	}
 	
-	
+	if(page_id == 5){
+		document.getElementById("click_through").innerHTML='';
+		
+		setTimeout(function(){
+			swoosh();
+		}, 0200);
+
+		function swoosh(){
+			document.getElementById("swoosh").play();
+		}
+		
+		setTimeout(function(){
+			stack();
+		}, 1000);
+
+		function stack(){
+			document.getElementById("stack").play();
+		}
+	}
 }
 
-
-function checkBtns(refNum){
-	switch(refNum){
+	function checkBtns(refNum){
+		switch(refNum){
 		case 1:
-		open_page('',2);
+		open_page('',1); //NA
 		break;
-		case 2:
-		open_page('',3);
-		break;
+		
+		}
 	}
-}
-	
+
 	function currentSlide(){
 		var curr_id =  parseInt($("#wrapper").attr("rel"));
 		$(".slides").removeClass("active");
@@ -524,6 +551,8 @@ function currentTimeInDatabaseFormat(){//to get current time in dd-mm-yyyy hh:mm
 	return duration;
 }
 
+// new js
+
 $(document).ready(function(){
 	$('body').on('click','.touchbtn',function(){
 		$('.right_arrow').trigger( "click" );
@@ -536,24 +565,7 @@ $(document).ready(function(){
 })
 
 
-function savedata(answer,type,questionNumber){
- 	if(questionNumber == 1){
-		var selectedAnswer1 = document.querySelector('input[name = "checkB01"]:checked').value;
-		var varanswer = selectedAnswer1;
-	}
-	
-	else if(questionNumber == 2){
-		var selectedAnswer1 = document.querySelector('input[name = "checkB01"]:checked').value;
-		var varanswer = selectedAnswer1;
-	}
-	
-	var question = arrSurveyQuestions[questionNumber];
-	localStorage.setItem("surveyQuestion_"+currentContentId+"_"+contentName+"_"+questionNumber,question);
-	localStorage.setItem("surveyAnswer_"+currentContentId+"_"+contentName+"_"+questionNumber,varanswer);
-	//toCaptureTime(2);
-    //document.getElementById('edit-count-checked-checkboxes').value=count;
-}
-
+/*--------------------- animation javascript -----------------------*/
 
 
 function closewindowslide(currentslide)
@@ -569,26 +581,51 @@ function endTime1(currentSlideNo){
 		localStorage.setItem(currentContentId+"_"+contentName+"_EndTime_"+currentSlideNo ,endTimeInDBFormat);
 
 }
+
 function hidesubmitonclick()
 {
 	$('.submit_button').css("display","none");
-	$('.control_indicator').css("display","none");
-	setTimeout(function(){ 
+	goRight();
+}
+
+function savedata(answer,type,questionNumber,page_id) {
+	$('#radio01').css("display","none");
+	$(".submit_button").css("display","none");
+	
+	
+	if(questionNumber == 2){
+		var selectedAnswer1 = document.querySelector('input[name = "checkB01"]:checked').value;
+		var varanswer = selectedAnswer1;
+	}
+	
+	var question = arrSurveyQuestions[questionNumber];
+	//localStorage.setItem("surveyQuestion_"+currentContentId+"_"+contentName+"_"+questionNumber,question);
+	//localStorage.setItem("surveyAnswer_"+currentContentId+"_"+contentName+"_"+questionNumber,varanswer);
+	//alert(question+varanswer);
+	
+	
+	var surveydata={
+		"question": question,
+        "answer": varanswer
+    };
+	
+	var objectData={
+		"gotoNextPrevBrand": localStorage.getItem("gotoNextPrevBrand"),
+          "previousslide": localStorage.getItem("previousslide"),
+         "slideId": page_id,
+		 "data": `${JSON.stringify(surveydata)}`
+         };
+	  var params = {
+	  "query" : objectData,
+	  "type" : "additionalInfo",
+	  "callback" : "checkLastPgFn"
+	  };
+
+	//window.messageHandler.postMessage(JSON.stringify(params)); //pageswipe 
+}
+
+function begin() {
+	setTimeout(function(){
 		go_nav('f');
-	}, 1000);
-}
-
-
-function selectYes()
-{
-	$(".submit_button").css("display","block");
-	$(".yes").css("display","block");
-	$(".no").css("display","none");
-}
-
-function selectNo()
-{
-	$(".submit_button").css("display","block");
-	$(".yes").css("display","none");
-	$(".no").css("display","block");
+	}, 0000);
 }
