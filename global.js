@@ -339,19 +339,19 @@ currentSlide();
 var selectedContentPath='';
 switch(pg_id){
 	case 1:
-	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide1/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide1/s2.png"/></div><div class="s3"><img src="slide1/s3.png"/></div><div class="s4"><img src="slide1/s4.png"/></div><div class="s5"><img src="slide1/s5.png"/></div><div class="s6"><img src="slide1/s6.png"/></div><audio autoplay id="intro" src="slide1/intro.mp3" type="audio/mpeg"></audio>';
+	content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="s1"><img src="slide1/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide1/s2.png"/></div><div class="s3"><img src="slide1/s3.png"/></div><div class="s4"><img src="slide1/s4.png"/></div><div class="s5"><img src="slide1/s5.png"/></div><div class="s6"><img src="slide1/s6.png"/></div><audio preload="auto" id="intro" src="slide1/intro.mp3" type="audio/mpeg"></audio>';
 	break;
 	case 2:
-	content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="s1"><img src="slide2/s1.png" width="1080" height="810"/></div><audio id="cardflip" src="slide2/cardflip.mp3" type="audio/mpeg"></audio><audio id="success" src="slide2/success.mp3" type="audio/mpeg"></audio><script>runAnimationCard()</script>';
+	content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="s1"><img src="slide2/s1.png" width="1080" height="810"/></div><audio preload="auto" id="cardflip" src="slide2/cardflip.mp3" type="audio/mpeg"></audio><audio preload="auto" id="success" src="slide2/success.mp3" type="audio/mpeg"></audio><script>runAnimationCard()</script>';
 	break;
 	case 3:
-	content='<link rel="stylesheet" type="text/css" href="slide3/slide3.css" media="screen"/><div class="s1"><img src="slide3/s1.png" width="1080" height="810"/></div><audio id="spin" src="slide3/spin.mp3" type="audio/mpeg"></audio><audio id="fanfare" src="slide3/fanfare.mp3" type="audio/mpeg"></audio><audio id="wrong" src="slide3/wrong.mp3" type="audio/mpeg"></audio><script>runAnimationWheel()</script>';
+	content='<link rel="stylesheet" type="text/css" href="slide3/slide3.css" media="screen"/><div class="s1"><img src="slide3/s1.png" width="1080" height="810"/></div><audio preload="auto" id="spin" src="slide3/spin.mp3" type="audio/mpeg"></audio><audio preload="auto" id="fanfare" src="slide3/fanfare.mp3" type="audio/mpeg"></audio><audio preload="auto" id="wrong" src="slide3/wrong.mp3" type="audio/mpeg"></audio><script>runAnimationWheel()</script>';
 	break;	
 	case 4:
-	content='<link rel="stylesheet" type="text/css" href="slide4/slide4.css" media="screen"/><div class="s1"><img src="slide4/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide4/s2.png"/></div><div class="s3"><img src="slide4/s3.png"/></div><div class="s4"><img src="slide4/s4.png"/></div><div class="s5"><img src="slide4/s5.png"/></div><div class="s6w"><div class="s6"><img src="slide4/s6.png"/></div></div><div class="s7"><img src="slide4/s7.png"/></div><div class="s8"><img src="slide4/s8.png"/></div><audio loop id="launch" src="slide4/launch.mp3" type="audio/mpeg"></audio>';
+	content='<link rel="stylesheet" type="text/css" href="slide4/slide4.css" media="screen"/><div class="s1"><img src="slide4/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide4/s2.png"/></div><div class="s3"><img src="slide4/s3.png"/></div><div class="s4"><img src="slide4/s4.png"/></div><div class="s5"><img src="slide4/s5.png"/></div><div class="s6w"><div class="s6"><img src="slide4/s6.png"/></div></div><div class="s7"><img src="slide4/s7.png"/></div><div class="s8"><img src="slide4/s8.png"/></div><audio preload="auto" id="launch" src="slide4/launch.mp3" type="audio/mpeg"></audio>';
 	break;
 	case 5:
-	content='<link rel="stylesheet" type="text/css" href="slide5/slide5.css" media="screen"/><div class="s1"><img src="slide5/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide5/s2.png"/></div><div class="s3"><img src="slide5/s3.png"/></div><div class="s4"><img src="slide5/s4.png"/></div><div class="s5"><img src="slide5/s5.png"/></div><div class="s6"><img src="slide5/s6.png"/></div><div class="s7"><img src="slide5/s7.png"/></div><div class="s8"><img src="slide5/s8.png"/></div><audio id="swoosh" src="slide5/swoosh.mp3" type="audio/mpeg"></audio><audio id="stack" src="slide5/stack.mp3" type="audio/mpeg"></audio>';
+	content='<link rel="stylesheet" type="text/css" href="slide5/slide5.css" media="screen"/><div class="s1"><img src="slide5/s1.png" width="1080" height="810" alt=""/></div><div class="s2"><img src="slide5/s2.png"/></div><div class="s3"><img src="slide5/s3.png"/></div><div class="s4"><img src="slide5/s4.png"/></div><div class="s5"><img src="slide5/s5.png"/></div><div class="s6"><img src="slide5/s6.png"/></div><div class="s7"><img src="slide5/s7.png"/></div><div class="s8"><img src="slide5/s8.png"/></div><audio preload="auto" id="swoosh" src="slide5/swoosh.mp3" type="audio/mpeg"></audio><audio preload="auto" id="stack" src="slide5/stack.mp3" type="audio/mpeg"></audio>';
 	break;
 	case 6:
 	content='<link rel="stylesheet" type="text/css" href="slide6/slide6.css" media="screen"/><div class="s1"><img src="slide6/s1.png" width="1080" height="810" alt=""/></div>';
@@ -461,7 +461,7 @@ function open_page2(url,page_id,count){
 	}
 	
 	if(page_id == 3){
-		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div id="gameCanvas"><div class="pointer left"></div><div class="pointer right"></div><div class="centerGlow"></div><div id="wheelWindow"><div id="wheelStrip"></div></div></div><img id="startBtn" src="slide3/start.png"><img id="resultImage" src=""><img id="retry" onclick="retry()" src="slide3/retry.png"><img id="lock" onclick="lock()" src="slide3/lock.png">';
+		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div id="gameCanvas"><div class="pointer left"></div><div class="pointer right"></div><div class="centerGlow"></div><div id="wheelWindow"><div id="wheelStrip"></div></div></div><img id="startBtn" src="slide3/start.png"><img id="resultImage" src=""><div id="retry" class="game-btn retry-btn"><span class="icon">🔁</span><span class="text">RETRY</span></div><div id="lock" class="game-btn lock-btn"><span class="icon">🔒</span><span class="text">LOCK</span></div>';
 	}
 	if(page_id == 4){
 		document.getElementById("click_through").innerHTML='';
@@ -480,7 +480,7 @@ function open_page2(url,page_id,count){
 		
 		setTimeout(function(){
 			swoosh();
-		}, 0200);
+		}, 0100);
 
 		function swoosh(){
 			document.getElementById("swoosh").play();
@@ -488,7 +488,7 @@ function open_page2(url,page_id,count){
 		
 		setTimeout(function(){
 			stack();
-		}, 1000);
+		}, 600);
 
 		function stack(){
 			document.getElementById("stack").play();

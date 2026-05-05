@@ -110,6 +110,7 @@ html[xmlns] .clearfix {
 	top: 380px;
 	opacity: .8;
 	z-index: 999;
+	display: none;
 	visibility: visible;
 }
 .left_arrow {
@@ -159,6 +160,7 @@ html[xmlns] .clearfix {
 	-webkit-transition: bottom 5s, -webkit-transform 2s;
 	transition: bottom 1s, -webkit-transform 2s;
 	visibility: visible;
+	display: none;
 	z-index: 999;
 }
 .slide_jumper {
@@ -208,6 +210,7 @@ html[xmlns] .clearfix {
 	-webkit-transition: bottom 1s, -webkit-transform 2s;
 	transition: bottom 1s, -webkit-transform 2s;
 	visibility: visible;
+	display: none;
 	z-index: 999;
 }
 .reference.active {

@@ -1,98 +1,235 @@
 function runAnimationWheel() {
 window.requestAnimationFrame(function () {
-  
+
 $(document).ready(function () {
 
 var values = [8000, 7000, 6000, 5000, 4000];
 var itemHeight = 80;
 var visibleItems = 5;
 var isSpinning = false;
+var isSelected = false;
 var lockedValue = null;
+var currentTop = 0;
+var slowSpeed = 0.7;
+var animationId = null;
 
-function buildWheel() {
-var html = "";
+var spinAudio = document.getElementById("spin");
 
-for (var i = 0; i < 30; i++) {
-  for (var j = 0; j < values.length; j++) {
-    html += '<div class="prize" data-value="' + values[j] + '">' + values[j] + '</div>';
-  }
+function playSpinAudioNormal() {
+  spinAudio.pause();
+  spinAudio.currentTime = 0;
+  spinAudio.volume = 0.6;
+  spinAudio.playbackRate = 1;
+  spinAudio.play();
 }
 
-$("#wheelStrip").html(html);
-$("#wheelStrip").css("top", "0px");
+function speedUpSpinAudio() {
+  spinAudio.playbackRate = 1.8;
+}
+
+function stopSpinAudio() {
+  spinAudio.pause();
+  spinAudio.currentTime = 0;
+  spinAudio.playbackRate = 1;
+}
+
+spinAudio.addEventListener("timeupdate", function () {
+  if (!spinAudio.duration) return;
+
+  if (spinAudio.currentTime >= spinAudio.duration - 0.15) {
+    spinAudio.currentTime = 0.01;
+  }
+});
+
+function buildWheel() {
+  var html = "";
+
+  for (var i = 0; i < 50; i++) {
+    for (var j = 0; j < values.length; j++) {
+      html += '<div class="prize" data-value="' + values[j] + '">' + values[j] + '</div>';
+    }
+  }
+
+  $("#wheelStrip").html(html);
+  $("#wheelStrip").css("top", "0px");
 }
 
 buildWheel();
 
-$("#startBtn, #retry").on("click touchstart", function (e) {
-e.preventDefault();
+function startWheel() {
 
-if (isSpinning) return;
-document.getElementById("spin").play();
-isSpinning = true;
+  if (isSpinning) return;
 
-$("#startBtn").addClass("disabled");
-$("#resultImage").hide();
-$("#retry").hide();
-$("#lock").hide();
+  isSpinning = true;
+  isSelected = false;
+  lockedValue = null;
 
-var randomIndex = Math.floor(Math.random() * values.length);
-var selectedValue = values[randomIndex];
+  $(".prize").removeClass("selected");
 
-var centerOffset = 2;
-var loops = 12;
-var finalIndex = loops * values.length + randomIndex;
-var finalTop = -((finalIndex - centerOffset) * itemHeight);
+  $("#resultImage").hide();
+  $("#brandImage").hide();
+  $("#retry").hide();
+  $("#lock").hide();
+  $("#startBtn").addClass("disabled");
 
-$("#wheelStrip").stop(true, true).css("top", "0px");
+  playSpinAudioNormal();
 
-$("#wheelStrip").animate(
-  { top: finalTop + "px" },
-  {
-    duration: 2500,
-    easing: "swing",
-    complete: function () {
+  moveWheelSlow();
+}
 
-      lockedValue = selectedValue;
+function moveWheelSlow() {
 
-      $('#lock').css("display", "block");
-      $('#retry').css("display", "block");
+  if (!isSpinning || isSelected) return;
 
-      $("#startBtn").removeClass("disabled");
-      isSpinning = false;
-    }
+  currentTop -= slowSpeed;
+
+  var totalCycleHeight = values.length * itemHeight;
+
+  if (Math.abs(currentTop) >= totalCycleHeight) {
+    currentTop = 0;
   }
-);
 
-});
+  $("#wheelStrip").css("top", currentTop + "px");
 
-window.lock = function () {
+  updateCenterResult();
 
-  if (lockedValue === null) return;
+  animationId = requestAnimationFrame(moveWheelSlow);
+}
+
+function updateCenterResult() {
+
+  var centerOffset = 2;
+  var centerIndex = Math.round((Math.abs(currentTop) / itemHeight) + centerOffset);
+  var valueIndex = centerIndex % values.length;
+  var centerValue = values[valueIndex];
 
   $("#resultImage")
-    .attr("src", "slide3/" + lockedValue + ".png")
-    .fadeIn(300);
+    .attr("src", "slide3/" + centerValue + ".png")
+    .show();
+}
 
-  if (lockedValue === 4000) {
-    document.getElementById("fanfare").play();
+function stopAtSelectedValue(selectedValue) {
 
-    setTimeout(function () {
-      go_nav('f');
-    }, 2000);
+  if (!isSpinning || isSelected) return;
+
+  isSelected = true;
+  isSpinning = false;
+  lockedValue = selectedValue;
+
+  cancelAnimationFrame(animationId);
+
+  speedUpSpinAudio();
+
+  $(".prize").removeClass("selected");
+
+  var centerOffset = 2;
+  var selectedIndex = values.indexOf(selectedValue);
+
+  var safeCycle = 20;
+
+  var finalIndex = (safeCycle * values.length) + selectedIndex;
+  var finalTop = -((finalIndex - centerOffset) * itemHeight);
+
+  $("#wheelStrip").stop(true, true).animate(
+    { top: finalTop + "px" },
+    {
+      duration: 600,
+      easing: "swing",
+      complete: function () {
+
+        currentTop = finalTop;
+
+        stopSpinAudio();
+
+        $(".prize").eq(finalIndex).addClass("selected");
+
+        $("#resultImage")
+          .attr("src", "slide3/" + selectedValue + ".png")
+          .show();
+
+        afterValueSelected(selectedValue);
+
+        setTimeout(function () {
+          $("#resultImage").hide();
+
+          $("#retry").css("display", "block");
+          $("#lock").css("display", "block");
+
+          $("#startBtn").addClass("disabled");
+        }, 1000);
+      }
+    }
+  );
+}
+
+function afterValueSelected(selectedValue) {
+/*if (selectedValue === 4000) {
+	  document.getElementById("fanfare").play();
   }
 
-  if (lockedValue === 5000 || lockedValue === 6000 || lockedValue === 7000 || lockedValue === 8000) {
-    document.getElementById("wrong").play();
+  if (selectedValue === 5000) {
+	  document.getElementById("wrong").play();
   }
 
-  $('#lock').css("display", "none");
-  $('#retry').css("display", "none");
+  if (selectedValue === 6000) {
+	  document.getElementById("wrong").play();
+  }
 
-  lockedValue = null;
-};
+  if (selectedValue === 7000) {
+	  document.getElementById("wrong").play();
+  }
 
+  if (selectedValue === 8000) {
+	  document.getElementById("wrong").play();
+  }*/
+}
+
+$("#startBtn, #retry").on("click touchstart", function (e) {
+  e.preventDefault();
+  startWheel();
 });
 
+$(document).on("click touchstart", ".prize", function (e) {
+  e.preventDefault();
+
+  if (!isSpinning || isSelected) return;
+
+  var selectedValue = parseInt($(this).attr("data-value"));
+  stopAtSelectedValue(selectedValue);
+});
+
+$("#lock").on("click touchstart", function (e) {
+  e.preventDefault();
+  
+  if (lockedValue === 4000) {
+	  document.getElementById("fanfare").play();
+  }
+
+  if (lockedValue === 5000) {
+	  document.getElementById("wrong").play();
+  }
+
+  if (lockedValue === 6000) {
+	  document.getElementById("wrong").play();
+  }
+
+  if (lockedValue === 7000) {
+	  document.getElementById("wrong").play();
+  }
+
+  if (lockedValue === 8000) {
+	  document.getElementById("wrong").play();
+  }
+  
+  if (lockedValue === null) return;
+
+  $("#lock").addClass("disabled");
+  $("#retry").addClass("disabled");
+  setTimeout(function () {
+	 begin();
+  }, 1500);
+});
+
+});
 });
 }
