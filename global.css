@@ -109,7 +109,6 @@ html[xmlns] .clearfix {
 	position: relative;
 	top: 380px;
 	opacity: .8;
-	display: none;
 	z-index: 999;
 	visibility: visible;
 }
@@ -160,7 +159,6 @@ html[xmlns] .clearfix {
 	-webkit-transition: bottom 5s, -webkit-transform 2s;
 	transition: bottom 1s, -webkit-transform 2s;
 	visibility: visible;
-	display: none;
 	z-index: 999;
 }
 .slide_jumper {
@@ -210,7 +208,6 @@ html[xmlns] .clearfix {
 	-webkit-transition: bottom 1s, -webkit-transform 2s;
 	transition: bottom 1s, -webkit-transform 2s;
 	visibility: visible;
-	display: none;
 	z-index: 999;
 }
 .reference.active {
