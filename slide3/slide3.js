@@ -10,7 +10,7 @@ var isSpinning = false;
 var isSelected = false;
 var lockedValue = null;
 var currentTop = 0;
-var slowSpeed = 3;
+var slowSpeed = 6;
 var animationId = null;
 
 var spinAudio = document.getElementById("spin");
