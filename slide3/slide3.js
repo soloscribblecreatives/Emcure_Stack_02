@@ -70,12 +70,12 @@ function startWheel() {
   $("#brandImage").hide();
   $("#retry").hide();
   $("#lock").hide();
-
-  $("#startBtn").hide();
+  
   $("#stopBtn").hide();
 
   setTimeout(function () {
     if (isSpinning) {
+	  $("#startBtn").hide();
       $("#stopBtn").show();
       stopReady = true;
     }
