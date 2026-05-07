@@ -79,7 +79,7 @@ function startWheel() {
       $("#stopBtn").show();
       stopReady = true;
     }
-  }, 100);
+  }, 500);
 
   playSpinAudioNormal();
 
