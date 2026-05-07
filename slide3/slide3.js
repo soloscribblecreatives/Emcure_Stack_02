@@ -70,7 +70,7 @@ function startWheel() {
   $("#brandImage").hide();
   $("#retry").hide();
   $("#lock").hide();
-  
+
   $("#startBtn").addClass("disabled");
   $("#stopBtn").hide();
 
