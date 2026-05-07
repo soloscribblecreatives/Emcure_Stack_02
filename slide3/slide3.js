@@ -3,7 +3,7 @@ window.requestAnimationFrame(function () {
 
 $(document).ready(function () {
 
-var values = [8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000];
+var values = [4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000];
 var itemHeight = 80;
 var visibleItems = 5;
 var isSpinning = false;
@@ -70,17 +70,6 @@ function startWheel() {
   $("#brandImage").hide();
   $("#retry").hide();
   $("#lock").hide();
-
-  $("#startBtn").addClass("disabled");
-  $("#stopBtn").hide();
-
-  setTimeout(function () {
-    if (isSpinning) {
-	  $("#startBtn").hide();
-      $("#stopBtn").show();
-      stopReady = true;
-    }
-  }, 1000);
 
   playSpinAudioNormal();
 
@@ -319,11 +308,34 @@ function afterValueLocked(lockedValue) {
   }
 }
 
-$("#startBtn, #retry").on("click touchstart", function (e) {
+$("#startBtn").on("click touchstart", function (e) {
   e.preventDefault();
   e.stopPropagation();
   startWheel();
-  $("#stopBtn").removeClass("disabled");
+  
+  $("#stopBtn").hide();
+  $("#startBtn").addClass("disabled");
+
+  setTimeout(function () {
+    if (isSpinning) {
+	  $("#startBtn").hide();
+      $("#stopBtn").show();
+      stopReady = true;
+    }
+  }, 1000);
+});
+
+$("#retry").on("click touchstart", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  startWheel();
+
+  setTimeout(function () {
+    if (isSpinning) {
+	  $("#stopBtn").removeClass("disabled");
+      stopReady = true;
+    }
+  }, 0000);
 });
 
 $("#stopBtn").on("click touchstart", function (e) {
