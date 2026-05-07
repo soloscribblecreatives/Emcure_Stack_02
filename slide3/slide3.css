@@ -54,7 +54,7 @@ left: 0;
 .prize {
 width: 250px;
 height: 80px;
-line-height: 70px;
+line-height: 71px;
 text-align: center;
 font-size: 38px;
 font-weight: bold;
@@ -67,8 +67,19 @@ z-index: 20;
 
 .prize.selected {
   background: linear-gradient(#eeff33, #ffdd00);
-  color: #fff;
+  color: #000 !important;
   box-shadow: inset 0 0 12px rgba(0,0,0,0.35);
+}
+
+.prize.active-center {
+  background: linear-gradient(#eeff33, #ffdd00) !important;
+  color: #000 !important;
+
+  transform: scale(1.04);
+
+  transition:
+    background 0.08s linear,
+    transform 0.08s linear;
 }
 
 .pointer {
@@ -95,16 +106,34 @@ border-right: 45px solid #ff304f;
 
 #startBtn {
 position: absolute;
-left: 835px;
-top: 431px;
-width: 189px;
-height: 189px;
+left: 834px;
+top: 428px;
+width: 190px;
+height: 190px;
 cursor: pointer;
 animation: pulse 1s infinite;
 z-index: 20;
 }
 
 #startBtn.disabled {
+pointer-events: none;
+opacity: 0.7;
+animation: none;
+}
+
+#stopBtn {
+position: absolute;
+left: 834px;
+top: 428px;
+width: 190px;
+height: 190px;
+cursor: pointer;
+animation: pulse 1s infinite;
+display: none;
+z-index: 25;
+}
+
+#stopBtn.disabled {
 pointer-events: none;
 opacity: 0.7;
 animation: none;
@@ -119,7 +148,7 @@ animation: none;
 #resultImage {
 position: absolute;
 left: 67px;
-top: 490px;
+top: 488px;
 width: 276px;
 height: 107px;
 display: none;

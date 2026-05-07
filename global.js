@@ -461,7 +461,7 @@ function open_page2(url,page_id,count){
 	}
 	
 	if(page_id == 3){
-		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div id="gameCanvas"><div class="pointer left"></div><div class="pointer right"></div><div class="centerGlow"></div><div id="wheelWindow"><div id="wheelStrip"></div></div></div><img id="startBtn" src="slide3/start.png"><img id="resultImage" src=""><div id="retry" class="game-btn retry-btn"><span class="icon">🔁</span><span class="text">RETRY</span></div><div id="lock" class="game-btn lock-btn"><span class="icon">🔒</span><span class="text">LOCK</span></div>';
+		document.getElementById("click_through").innerHTML='<div class="blocker1"></div><div id="gameCanvas"><div class="pointer left"></div><div class="pointer right"></div><div class="centerGlow"></div><div id="wheelWindow"><div id="wheelStrip"></div></div></div><img id="startBtn" src="slide3/start.png"><img id="stopBtn" src="slide3/stop.png"><img id="resultImage" src=""><div id="retry" class="game-btn retry-btn"><span class="icon">🔁</span><span class="text">RETRY</span></div><div id="lock" class="game-btn lock-btn"><span class="icon">🔒</span><span class="text">LOCK</span></div>';
 	}
 	if(page_id == 4){
 		document.getElementById("click_through").innerHTML='';

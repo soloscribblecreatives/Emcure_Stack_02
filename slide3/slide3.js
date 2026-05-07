@@ -3,19 +3,20 @@ window.requestAnimationFrame(function () {
 
 $(document).ready(function () {
 
-var values = [8000, 7000, 6000, 5000, 4000];
+var values = [8000, 7500, 7000, 6500, 6000, 5500, 5000, 4500, 4000];
 var itemHeight = 80;
 var visibleItems = 5;
 var isSpinning = false;
-var isSelected = false;
 var lockedValue = null;
 var currentTop = 0;
-var slowSpeed = 6;
+var wheelSpeed = 10;
 var animationId = null;
+var stopReady = false;
 
 var spinAudio = document.getElementById("spin");
 
 function playSpinAudioNormal() {
+  if (!spinAudio) return;
   spinAudio.pause();
   spinAudio.currentTime = 0;
   spinAudio.volume = 0.6;
@@ -23,23 +24,22 @@ function playSpinAudioNormal() {
   spinAudio.play();
 }
 
-function speedUpSpinAudio() {
-  spinAudio.playbackRate = 1.8;
-}
-
 function stopSpinAudio() {
+  if (!spinAudio) return;
   spinAudio.pause();
   spinAudio.currentTime = 0;
   spinAudio.playbackRate = 1;
 }
 
-spinAudio.addEventListener("timeupdate", function () {
-  if (!spinAudio.duration) return;
+if (spinAudio) {
+  spinAudio.addEventListener("timeupdate", function () {
+    if (!spinAudio.duration) return;
 
-  if (spinAudio.currentTime >= spinAudio.duration - 0.15) {
-    spinAudio.currentTime = 0.01;
-  }
-});
+    if (spinAudio.currentTime >= spinAudio.duration - 0.30) {
+      spinAudio.currentTime = 0.01;
+    }
+  });
+}
 
 function buildWheel() {
   var html = "";
@@ -61,8 +61,8 @@ function startWheel() {
   if (isSpinning) return;
 
   isSpinning = true;
-  isSelected = false;
   lockedValue = null;
+  stopReady = false;
 
   $(".prize").removeClass("selected");
 
@@ -70,18 +70,27 @@ function startWheel() {
   $("#brandImage").hide();
   $("#retry").hide();
   $("#lock").hide();
-  $("#startBtn").addClass("disabled");
+
+  $("#startBtn").hide();
+  $("#stopBtn").hide();
+
+  setTimeout(function () {
+    if (isSpinning) {
+      $("#stopBtn").show();
+      stopReady = true;
+    }
+  }, 100);
 
   playSpinAudioNormal();
 
-  moveWheelSlow();
+  moveWheel();
 }
 
-function moveWheelSlow() {
+function moveWheel() {
 
-  if (!isSpinning || isSelected) return;
+  if (!isSpinning) return;
 
-  currentTop -= slowSpeed;
+  currentTop -= wheelSpeed;
 
   var totalCycleHeight = values.length * itemHeight;
 
@@ -93,39 +102,62 @@ function moveWheelSlow() {
 
   updateCenterResult();
 
-  animationId = requestAnimationFrame(moveWheelSlow);
+  animationId = requestAnimationFrame(moveWheel);
+}
+
+function getCenterValueData() {
+
+  var centerOffset = 2;
+
+  var rawIndex = (Math.abs(currentTop) / itemHeight) + centerOffset;
+  var nearestIndex = Math.round(rawIndex);
+
+  var valueIndex = nearestIndex % values.length;
+  var selectedValue = values[valueIndex];
+
+  return {
+    value: selectedValue,
+    index: nearestIndex,
+    valueIndex: valueIndex
+  };
 }
 
 function updateCenterResult() {
 
-  var centerOffset = 2;
-  var centerIndex = Math.round((Math.abs(currentTop) / itemHeight) + centerOffset);
-  var valueIndex = centerIndex % values.length;
-  var centerValue = values[valueIndex];
+  $(".prize").removeClass("active-center");
+
+  var data = getCenterValueData();
+  var centerValue = data.value;
+  var centerIndex = data.index;
+
+  $(".prize").eq(centerIndex).addClass("active-center");
 
   $("#resultImage")
     .attr("src", "slide3/" + centerValue + ".png")
     .show();
 }
 
-function stopAtSelectedValue(selectedValue) {
+function stopWheelByUser() {
 
-  if (!isSpinning || isSelected) return;
+  if (!isSpinning || !stopReady) return;
 
-  isSelected = true;
   isSpinning = false;
-  lockedValue = selectedValue;
+  stopReady = false;
 
   cancelAnimationFrame(animationId);
 
-  speedUpSpinAudio();
+  stopSpinAudio();
+
+  var data = getCenterValueData();
+  var selectedValue = data.value;
+
+  lockedValue = selectedValue;
 
   $(".prize").removeClass("selected");
 
   var centerOffset = 2;
-  var selectedIndex = values.indexOf(selectedValue);
-
   var safeCycle = 20;
+  var selectedIndex = values.indexOf(selectedValue);
 
   var finalIndex = (safeCycle * values.length) + selectedIndex;
   var finalTop = -((finalIndex - centerOffset) * itemHeight);
@@ -133,13 +165,11 @@ function stopAtSelectedValue(selectedValue) {
   $("#wheelStrip").stop(true, true).animate(
     { top: finalTop + "px" },
     {
-      duration: 600,
+      duration: 000,
       easing: "swing",
       complete: function () {
 
         currentTop = finalTop;
-
-        stopSpinAudio();
 
         $(".prize").eq(finalIndex).addClass("selected");
 
@@ -149,84 +179,173 @@ function stopAtSelectedValue(selectedValue) {
 
         afterValueSelected(selectedValue);
 
+        $("#stopBtn").addClass("disabled");
+
         setTimeout(function () {
           $("#resultImage").hide();
-
           $("#retry").css("display", "block");
           $("#lock").css("display", "block");
-
-          $("#startBtn").addClass("disabled");
-        }, 1000);
+        }, 2000);
       }
     }
   );
 }
 
 function afterValueSelected(selectedValue) {
-/*if (selectedValue === 4000) {
-	  document.getElementById("fanfare").play();
+	
+  if (selectedValue === 3000) {
+    // Action when 4000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (selectedValue === 3500) {
+    // Action when 4500 is selected
+    // $("#brandImage").fadeIn(300);
+  }	
+
+  if (selectedValue === 4000) {
+    // Action when 4000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (selectedValue === 4500) {
+    // Action when 4500 is selected
+    // $("#brandImage").fadeIn(300);
   }
 
   if (selectedValue === 5000) {
-	  document.getElementById("wrong").play();
+    // Action when 5000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (selectedValue === 5500) {
+    // Action when 5500 is selected
+    // $("#brandImage").fadeIn(300);
   }
 
   if (selectedValue === 6000) {
-	  document.getElementById("wrong").play();
+    // Action when 6000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (selectedValue === 6500) {
+    // Action when 6500 is selected
+    // $("#brandImage").fadeIn(300);
   }
 
   if (selectedValue === 7000) {
-	  document.getElementById("wrong").play();
+    // Action when 7000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (selectedValue === 7500) {
+    // Action when 7500 is selected
+    // $("#brandImage").fadeIn(300);
   }
 
   if (selectedValue === 8000) {
-	  document.getElementById("wrong").play();
-  }*/
+    // Action when 8000 is selected
+    // $("#brandImage").fadeIn(300);
+  }
 }
 
-$("#startBtn, #retry").on("click touchstart", function (e) {
-  e.preventDefault();
-  startWheel();
-});
-
-$(document).on("click touchstart", ".prize", function (e) {
-  e.preventDefault();
-
-  if (!isSpinning || isSelected) return;
-
-  var selectedValue = parseInt($(this).attr("data-value"));
-  stopAtSelectedValue(selectedValue);
-});
-
-$("#lock").on("click touchstart", function (e) {
-  e.preventDefault();
+function afterValueLocked(lockedValue) {
   
+  if (lockedValue === 3000) {
+	  document.getElementById("wrong").play();
+    // Action when 4000 is locked
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (lockedValue === 3500) {
+	  document.getElementById("wrong").play();
+    // Action when 4500 is locked
+    // $("#brandImage").fadeIn(300);
+  }  
+
   if (lockedValue === 4000) {
 	  document.getElementById("fanfare").play();
+    // Action when 4000 is locked
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (lockedValue === 4500) {
+	  document.getElementById("wrong").play();
+    // Action when 4500 is locked
+    // $("#brandImage").fadeIn(300);
   }
 
   if (lockedValue === 5000) {
 	  document.getElementById("wrong").play();
+    // Action when 5000 is locked
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (lockedValue === 5500) {
+	  document.getElementById("wrong").play();
+    // Action when 5500 is locked
+    // $("#brandImage").fadeIn(300);
   }
 
   if (lockedValue === 6000) {
 	  document.getElementById("wrong").play();
+    // Action when 6000 is locked
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (lockedValue === 6500) {
+	  document.getElementById("wrong").play();
+    // Action when 6500 is locked
+    // $("#brandImage").fadeIn(300);
   }
 
   if (lockedValue === 7000) {
 	  document.getElementById("wrong").play();
+    // Action when 7000 is locked
+    // $("#brandImage").fadeIn(300);
+  }
+
+  if (lockedValue === 7500) {
+	  document.getElementById("wrong").play();
+    // Action when 7500 is locked
+    // $("#brandImage").fadeIn(300);
   }
 
   if (lockedValue === 8000) {
 	  document.getElementById("wrong").play();
+    // Action when 8000 is locked
+    // $("#brandImage").fadeIn(300);
   }
-  
+}
+
+$("#startBtn, #retry").on("click touchstart", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  startWheel();
+  $("#stopBtn").removeClass("disabled");
+});
+
+$("#stopBtn").on("click touchstart", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (!stopReady) return;
+
+  stopWheelByUser();
+});
+
+$("#lock").on("click touchstart", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
   if (lockedValue === null) return;
+
+  afterValueLocked(lockedValue);
 
   $("#lock").addClass("disabled");
   $("#retry").addClass("disabled");
   setTimeout(function () {
-	 begin();
+     begin();
   }, 1500);
 });
 
