@@ -71,6 +71,7 @@ function startWheel() {
   $("#retry").hide();
   $("#lock").hide();
   
+  $("#startBtn").addClass("disabled");
   $("#stopBtn").hide();
 
   setTimeout(function () {
@@ -79,7 +80,7 @@ function startWheel() {
       $("#stopBtn").show();
       stopReady = true;
     }
-  }, 500);
+  }, 1000);
 
   playSpinAudioNormal();
 
